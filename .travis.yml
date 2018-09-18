@@ -1,0 +1,50 @@
+language: node_js
+node_js: '8'
+env:
+  global:
+    secure: gC4vzdapKI/uOlzaqc3cKbwI+E3QoWOvFTtnLt8joO++f/GHhN84DCkWfT9u+ZNpz2ZaZCRDNSZTZazwfRGRvXSQVZR6nOFKjNJFuLdnOKl+NNcWSdrSydzv+sloTRVtp3D2DK9UV7aVPLOE+sIM5wtF5wmboK7KSoEVXBOJSBllXIY/0+7HL9peIEhxyP2aisZq4k6dlTvYp3HTVIeOubpCQwSdtW6OmdeYCybkDhA5Re8LDTX1zHbYNjE2gnRbGH5LjHhlgaR+oF/y7U1/M2WUk+NTorV0Yit9eKKVfwXqS2Yo2Xxf7x2885LwWjluCMv2Lh6jpCOLTBKajrQpkYm81qYPI2EcK4qYCQjZHvkgeHpUzQq5H4Q7rL6bbm+HSlN3doCfyNSdb75su9/lGNf3nJvNZ16dXyTOWGNIAl7tBXReNHHmQmXN1z8pBoZmQNz1be5yWIjX7rJ9XfNstMXI/86t0oIAj8rtbj2eXuN96rJLp0JHjiqyZtThhaH1skYzKRz/63d7B6dcqDRF272elOecpoEB53b46yqRzEZzNZLEK94WhJCa9wwR6UEn1ipqAxlL9CugZC5lT0a5iA5+ZuOYL7Qk+icKwSW4jbUYANHwXqIeGD7S9FCdrslmR3iPCXtR4k8QhG/HHDhjuJ4VPw3JDDHHT3Sv+4ac1QY=
+
+before_install:
+- curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH="$HOME/.yarn/bin:$PATH"
+
+cache:
+  yarn: true
+  directories:
+  - node_modules
+
+
+jobs:
+  include:
+  - stage: build
+    script:
+      - yarn install
+      - yarn build
+  - stage: test
+    script:
+      - yarn cover
+      - bash <(curl -s https://codecov.io/bash)
+  - stage: deploy
+    script: skip
+    deploy: &heroku
+      on:
+        branch: master
+      provider: heroku
+      app: chalmers-ci-backend
+      api_key:
+        secure: bsCP2h4E8bt/W8bVmknwGOij/iZZnMEdEtgPKPSGjx3lvcP29zV+K4l0W9mLlvNt7V1hdQ7Lhp5IzLaNmgFM+T4oBKrWwuaejhEtqA9FB+hp8Of++4xOJ7OcmuLH8CVJRSGd9mlvtZ6C6hZFT1HxaHrA8OIZrWmaL/K5wWOSmD/46091MjpIwvVejRR/gRXErM/1r7DrqGjGr68FGvYlYy+4tosX2CAvK6duNvytfpmc0m4ByJZwCtWiyhTRMLgv6j2Vjhu3jvegNoP54ufAgx7coLlGTsm8/1ej1MZQ0XphciLp2Gp1KjYpz58anV9lPB3PqzsTL8b3yzumY29ioNxUA7NpnpYM1532MRqsqvYnByLN69i+oNhBdHv7I6rxuJsM16JsxJ96sxXlsuPEjhznC2cJzKsd1nBo72DM2BF+5PZRgylRejKJdAEyEeTzGuVguUlagrK6ugHU5eChSMOtidfzzofCM0Jn8g5h8/JvpjGzBTQgCend/dkSa7EAhPjl2FMScCedcy0YsGXk/ry1apkCbrXvSxmj3H9OTftiEuXCrdpba6P8jRrOg0gavyOm4KDeolU+bKwZ2cR9ieC9yet7bBk/5JnYEHMVwvKzXkgGMge+SGvf8JNBoxMlO8dI1o+X8dkHVEBy7n015QuuesGDlEx2BIat4eEhASI=
+  - stage: deploy
+    script: skip
+    deploy: &heroku
+      on:
+        branch: develop
+      provider: heroku
+      app: test-chalmers-ci-backend
+      api_key:
+        secure: bsCP2h4E8bt/W8bVmknwGOij/iZZnMEdEtgPKPSGjx3lvcP29zV+K4l0W9mLlvNt7V1hdQ7Lhp5IzLaNmgFM+T4oBKrWwuaejhEtqA9FB+hp8Of++4xOJ7OcmuLH8CVJRSGd9mlvtZ6C6hZFT1HxaHrA8OIZrWmaL/K5wWOSmD/46091MjpIwvVejRR/gRXErM/1r7DrqGjGr68FGvYlYy+4tosX2CAvK6duNvytfpmc0m4ByJZwCtWiyhTRMLgv6j2Vjhu3jvegNoP54ufAgx7coLlGTsm8/1ej1MZQ0XphciLp2Gp1KjYpz58anV9lPB3PqzsTL8b3yzumY29ioNxUA7NpnpYM1532MRqsqvYnByLN69i+oNhBdHv7I6rxuJsM16JsxJ96sxXlsuPEjhznC2cJzKsd1nBo72DM2BF+5PZRgylRejKJdAEyEeTzGuVguUlagrK6ugHU5eChSMOtidfzzofCM0Jn8g5h8/JvpjGzBTQgCend/dkSa7EAhPjl2FMScCedcy0YsGXk/ry1apkCbrXvSxmj3H9OTftiEuXCrdpba6P8jRrOg0gavyOm4KDeolU+bKwZ2cR9ieC9yet7bBk/5JnYEHMVwvKzXkgGMge+SGvf8JNBoxMlO8dI1o+X8dkHVEBy7n015QuuesGDlEx2BIat4eEhASI=
+
+stages:
+  - build
+  - test
+  - deploy
+
