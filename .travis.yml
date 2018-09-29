@@ -30,7 +30,7 @@ jobs:
       on:
         branch: master
       provider: heroku
-      app: chalmers-ci-backend
+      app: gu-ci-backend
       api_key:
         secure: "eDNrbdjHrQe2aHz0AdBJfCcovSKh3d0GUOpccMlsLzQmdCt+ansFLSCIXVpnhSwkK5Od821bXEMxW3d3NSdKvnpwKMBItSWJgfVZ5mqwRBoPRT0GREYfpY5S6MEYcVMfzKfzwZXRDzJLkcpOPD43LmC55VekpqDvEqTsnkxjkwMiuDr5hCYFyOQpb73xMGjg353dlnezDNQfi0dhWGdhYtL7cfHQ1e31EV33V7J+OV5JQNBH+CI/p/Ramv5VPNS6IQS3Dj1CQ5Ha3+rfbjkzHL7wSJygAMK4CK0eUm91JVpqN+g3DrBD93Yi6qkADlPGekbg79C2uo00KdQbrTeJphXOXNj9I+P3bcfn8REjV+eykncj0bVx4KRCGCdLzuz9YaAUi1SRF9XauvvFi9lXnQMFRvIvjOo23i8sA/gHKRTwCL80knLCNasXSBT53I2HoOVndbxnF3oCjJoGYqayQMQJBuIISN/EcqiZAVlbi2HW7wAYnaMMvikzh+JdfYzr0zKtD2WAHbF0aj6gt18dLdWR/cYMWrVfegbOrcBSRs2yTI+kFrSv2+kyEzyvPB+THBVdE7SgylLdBhP/r8esEm04n+aDi+O7I66aw8jAGuJB84NlYCgXp7hhsnGQnTDNNb3vSfaKgbkUOPQsoV/Hw2Isbl9TNV22RFi/ZXrhAuM="
   - stage: deploy
@@ -39,7 +39,7 @@ jobs:
       on:
         branch: develop
       provider: heroku
-      app: test-chalmers-ci-backend
+      app: test-gu-ci-backend
       api_key:
         secure: "eDNrbdjHrQe2aHz0AdBJfCcovSKh3d0GUOpccMlsLzQmdCt+ansFLSCIXVpnhSwkK5Od821bXEMxW3d3NSdKvnpwKMBItSWJgfVZ5mqwRBoPRT0GREYfpY5S6MEYcVMfzKfzwZXRDzJLkcpOPD43LmC55VekpqDvEqTsnkxjkwMiuDr5hCYFyOQpb73xMGjg353dlnezDNQfi0dhWGdhYtL7cfHQ1e31EV33V7J+OV5JQNBH+CI/p/Ramv5VPNS6IQS3Dj1CQ5Ha3+rfbjkzHL7wSJygAMK4CK0eUm91JVpqN+g3DrBD93Yi6qkADlPGekbg79C2uo00KdQbrTeJphXOXNj9I+P3bcfn8REjV+eykncj0bVx4KRCGCdLzuz9YaAUi1SRF9XauvvFi9lXnQMFRvIvjOo23i8sA/gHKRTwCL80knLCNasXSBT53I2HoOVndbxnF3oCjJoGYqayQMQJBuIISN/EcqiZAVlbi2HW7wAYnaMMvikzh+JdfYzr0zKtD2WAHbF0aj6gt18dLdWR/cYMWrVfegbOrcBSRs2yTI+kFrSv2+kyEzyvPB+THBVdE7SgylLdBhP/r8esEm04n+aDi+O7I66aw8jAGuJB84NlYCgXp7hhsnGQnTDNNb3vSfaKgbkUOPQsoV/Hw2Isbl9TNV22RFi/ZXrhAuM="
 
