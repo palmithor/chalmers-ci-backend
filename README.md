@@ -1,1 +1,1 @@
-# chalmers-ci-backend
+# gu-ci-backend
